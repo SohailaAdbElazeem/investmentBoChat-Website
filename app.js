@@ -79,25 +79,47 @@ document.addEventListener("DOMContentLoaded", function() {
 
  
 // SendEmail
-  const form = document.getElementById('investmentForm');
-  const inputs = form.querySelectorAll('input, label');
+//   const form = document.getElementById('investmentForm');
+//   const inputs = form.querySelectorAll('input, label');
  
-form.addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
+// form.addEventListener('submit', function(e){
+//   e.preventDefault();
+//   const name = document.getElementById('name').value.trim();
+//   const email = document.getElementById('email').value.trim();
 
-  if(!name || !email) {
-    alert('يرجى إدخال الاسم والايميل');
-    return;
-  }
+//   if(!name || !email) {
+//     alert('يرجى إدخال الاسم والايميل');
+//     return;
+//   }
 
-  const subject = encodeURIComponent("طلب استثمار");
-  const body = encodeURIComponent(`الاسم: ${name}\nالايميل: ${email}`);
-  window.location.href = `mailto:panda-oracle@bo-chat.space?subject=${subject}&body=${body}`;
-});
+//   const subject = encodeURIComponent("طلب استثمار");
+//   const body = encodeURIComponent(`الاسم: ${name}\nالايميل: ${email}`);
+//   window.location.href = `mailto:panda-oracle@bo-chat.space?subject=${subject}&body=${body}`;
+// });
+
+//  const form = document.getElementById("investmentForm");
+
+// form.addEventListener("submit", async function (e) {
+//   e.preventDefault();
+
+//   const data = new FormData(form);
+
+//   const res = await fetch("https://formspree.io/f/xlgarlge", {
+//     method: "POST",
+//     body: data,
+//     headers: {
+//       Accept: "application/json"
+//     }
+//   });
+
+//   if (res.ok) {
+//     alert("تم الإرسال بنجاح ✅");
+//     form.reset();
+//   } else {
+//     alert("حدث خطأ ❌");
+//   }
+// });
  
-
 //  Rating
  document.addEventListener('DOMContentLoaded', () => {
   const sliders = document.querySelectorAll('.rate');

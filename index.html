@@ -9,6 +9,7 @@
 <link rel="icon" href="./images/logo favicon.jpg" type="image/x-icon">
 
     <link rel="stylesheet" href="./css/style.css">
+      
 </head>
 <body>
         <section class="main-section" id="main">
@@ -215,8 +216,7 @@
       <input type="submit" class="submit-btn" value=""
        data-ar="احصل على التفاصيل" data-en="Get Details">
 
-      <!-- <input type="submit" value="احصل على النفاصيل" class="submit-btn" data-ar="احصل على النفاصيل" data-en="Get Details"> -->
-    </form>
+     </form>
   </div>
 </section>
 
@@ -407,6 +407,43 @@ Operational Center (Egypt): Our operational office in Egypt acts as the heartbea
 </footer>
  
     </body>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+ emailjs.init("J6NPrHWqLKI5eMpTn");
+
+const form = document.getElementById('investmentForm');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name  = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+     if (!name || !email) {
+        alert('يرجى إدخال الاسم والإيميل');
+        return;
+    }
+
+     const templateParams = {
+        from_name:  name,
+        from_email: email,
+        message:    `طلب استثمار جديد\n\nالاسم: ${name}\nالإيميل: ${email}\n\nتم الإرسال من نموذج الاستثمار`
+    };
+
+    // إرسال الإيميل
+    emailjs.send('service_cs2i34o', 'template_5kxk00a', templateParams)
+        .then(function(response) {
+            console.log('تم الإرسال بنجاح!', templateParams);
+            alert(' تم إرسال طلبك بنجاح!\nسنتواصل معك قريباً .');
+            form.reset();       
+        })
+        .catch(function(error) {
+            console.error('فشل الإرسال:', error);
+            alert(' حدث خطأ أثناء الإرسال.\nبرجاء المحاولة مرة أخرى.');
+        });
+});
+</script>
     <script src="./app.js"></script>
    
 </html>
