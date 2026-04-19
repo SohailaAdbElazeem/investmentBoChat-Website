@@ -407,7 +407,7 @@ Operational Center (Egypt): Our operational office in Egypt acts as the heartbea
 </footer>
  
     </body>
- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+ <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
  emailjs.init("J6NPrHWqLKI5eMpTn");
@@ -443,7 +443,54 @@ form.addEventListener('submit', function(e) {
             alert(' حدث خطأ أثناء الإرسال.\nبرجاء المحاولة مرة أخرى.');
         });
 });
+</script> -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("J6NPrHWqLKI5eMpTn");
+
+const form = document.getElementById('investmentForm');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name  = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if (!name || !email) {
+        alert('يرجى إدخال الاسم والإيميل');
+        return;
+    }
+
+    // بيانات مشتركة
+    const templateParams = {
+        name: name,
+        email: email,
+        message: `طلب استثمار جديد\n\nالاسم: ${name}\nالإيميل: ${email}\n\nتم الإرسال من نموذج الاستثمار`
+    };
+
+    // 1️⃣ إرسال للإدارة (عندك)
+    emailjs.send('service_cs2i34o', 'template_5kxk00a', templateParams)
+        .then(function(response) {
+             console.log('Admin email sent!', response);
+
+            // 2️⃣ Auto Reply للمستخدم
+            return emailjs.send('service_cs2i34o', 'template_tnqp3ft', templateParams);
+        })
+        .then(function(response) {
+            console.log('Auto reply sent!', response);
+            alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً.');
+            form.reset();
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            alert('حدث خطأ أثناء الإرسال. برجاء المحاولة مرة أخرى.');
+        });
+
+});
 </script>
-    <script src="./app.js"></script>
+
+     <script src="./app.js"></script>
    
 </html>
