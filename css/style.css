@@ -130,7 +130,8 @@ html[dir="ltr"] .main-content p {
     width: 15.875rem;
     background-color: #D72229;
     color: #FFF;
- }
+    font-size: 18px;
+  }
  html[dir="ltr"] .main-buttons .btn-invest {
     width: 14rem;
 }
