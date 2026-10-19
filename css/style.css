@@ -177,6 +177,25 @@ html[dir="ltr"] .main-content p {
   border-radius: 20px;
   background-color: #FFF;
 }
+/* الحاوية — نفس حجم المربع الأبيض */
+.rate-card .rate-icon {
+  width: 4.75rem;           /* 76px — زي الأيقونة القديمة */
+  height: 4.75rem;
+  border-radius: 20px;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* الصورة جوه الحاوية — الحجم اللي تحدده */
+.rate-card .rate-icon img {
+  width: 30px;              /* ← غيّري هنا لو عايزة أصغر/أكبر */
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
 .rate-card .text-rating {
     color: #FFFFFF;
     text-align: left;
@@ -605,17 +624,17 @@ html[dir="ltr"] .slider-track {
 }
 /*   offer-section section*/
 .offer-section {
-    background-color: #D72229;
+    background-color: #050506;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 40px 0;
+    margin: 10px 0;
     gap: 20px;
 }
-.offer-section .offer-text {
+/* .offer-section .offer-text {
        margin: 40px 0;  
        width: 40%;
-}
+} */
 .offer-section .offer-text p{
      color:#FFF;
      font-size: 50px;
@@ -651,7 +670,7 @@ html[dir="ltr"] .slider-track {
 
 /* Main Offer Section */
 .offer-section {
-    background-color: #D72229;
+    background-color: #050506;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -680,7 +699,7 @@ html[dir="ltr"] .slider-track {
     background-color: #FFF;
     width: 355px;
     height: 4.125rem;    
-    color: #D72229;
+    color: #050506;
     font-weight: 600;
     font-size: 22px;
     border-radius: 25px;
@@ -1335,9 +1354,7 @@ html[dir="ltr"] .slider-track {
 }
 
 .world-connectivity img {
-    display: block;
-    width: 100%;
-    height: auto;
+    
     aspect-ratio: 16 / 9;       /* نفس نسبة 1920×1080 */
     object-fit: cover;          /* يملأ العرض بدون تشويه */
     object-position: center;
@@ -1346,7 +1363,17 @@ html[dir="ltr"] .slider-track {
     -webkit-user-drag: none;
     pointer-events: none;
 }
- 
+.world-connectivity img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 730px;
+   object-position: center;
+  background: #F3F3F3;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
 /* شاشات كبيرة جداً */
 @media (min-width: 1921px) {
     .world-connectivity {
@@ -1391,8 +1418,8 @@ html[dir="ltr"] .slider-track {
   color: #38383a;
   background: #F3F3F3; 
   font-family: "Cairo", sans-serif;
-    border-bottom: 4px solid #000000; 
- }
+    border-bottom: 2px solid #7C7D7E !important; 
+  }
 
 /* ==========================================
    Left Column (العنوان + الرقم الكبير)
@@ -1488,11 +1515,12 @@ html[dir="ltr"] .slider-track {
   position: absolute; 
   z-index: 1; 
   display: flex; 
-  gap: 12px; 
+  gap: 12px ; 
   align-items: flex-start; 
   width: 28%; 
   text-align: right; 
   font-family: "Cairo", sans-serif; 
+  margin-top: -10px;
 }
 
 .milestone b { 
@@ -1982,6 +2010,124 @@ html[dir="ltr"] .slider-track {
 }
 
 /* ////////////////// */
+/* 📱 Tablet & Mobile (≤ 992px) */
+@media (max-width: 992px) {
+  /* 1. تعديل الكارت الأساسي */
+  .timeline-card {
+    min-height: auto;
+    padding: 30px 5%;
+    display: flex;
+    flex-direction: row-reverse; /* العناصر تحت بعض */
+  }
+
+  /* 2. العنوان والرقم الكبير (فوق) */
+  .timeline-left-col {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    align-items: center; /* توسيط */
+    /* margin-bottom: 30px; */
+    text-align: center;
+  }
+
+  .timeline-heading {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    /* font-size: 10px; */
+  }
+
+  .timeline-heading p {
+    font-size: clamp(28px, 4vw, 36px); /* حجم مناسب */
+   }
+
+  .timeline-number {
+    width: 100%;
+    text-align: center;
+    font-size: clamp(120px, 20vw, 200px);
+    line-height: 0.8;
+    margin-top: 20px;
+    /* font-size: 300px !important; */
+  }
+
+  /* 3. إخفاء الخط المتقطع */
+  .timeline-path { 
+    display: none; 
+  }
+
+  /* 4. ترتيب الـ Milestones تحت بعض */
+  .timeline-right-col {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* مسافة بين كل نقطة والتانية */
+  }
+
+  .milestone,
+  .milestone-one,
+  .milestone-two,
+  .milestone-three {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    margin: 0;
+    gap: 15px;
+    /* background: #fff; خلفية بيضاء لتمييز كل كارت */
+    padding: 15px;
+    /* border-radius: 12px; */
+    /* box-shadow: 0 2px 10px rgba(0,0,0,0.05); */
+  }
+
+  /* 5. أحجام النصوص في الموبايل */
+  .milestone b {
+    width: 55px;
+    min-height: 50px;
+    flex-basis: 55px;
+    font-size: clamp(24px, 4vw, 36px);
+  }
+
+  .milestone h3 {
+    font-size: clamp(16px, 2.5vw, 22px);
+  }
+
+  .milestone p {
+    font-size: clamp(14px, 2vw, 18px);
+  }
+}
+
+/* 📱 Mobile Small (≤ 576px) */
+@media (max-width: 576px) {
+  .timeline-card {
+    padding: 20px 4%;
+  }
+  
+  .timeline-number {
+    font-size: clamp(100px, 35vw, 160px); /* تصغير الرقم شوية */
+  }
+
+  .milestone {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .milestone b {
+    width: 40px;
+    min-height: 40px;
+    flex-basis: 40px;
+    font-size: 24px;
+  }
+  
+  .milestone h3 { font-size: 16px; }
+  .milestone p { font-size: 13px; }
+}
+
 
 /* ==========================================
 /* ==========================================
@@ -2024,7 +2170,7 @@ html[dir="ltr"] .slider-track {
     margin: 0;
     font-family: 'Cairo', sans-serif;
     font-weight: 500;
-    font-size: 40px;
+    font-size: 35px;
     line-height: 140%;
     letter-spacing: 0%;
     color: #D72229;
@@ -2143,8 +2289,9 @@ html[dir="ltr"] .slider-track {
   margin-bottom: 40px;
   margin-right: 40px;
   margin-left: 40px;
+ 
 }
-
+ 
 .projection-card, .revenue-card {
   min-width: 0;
   padding: 16px;
@@ -2160,22 +2307,27 @@ html[dir="ltr"] .slider-track {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 0px;
   margin-bottom: 14px;
 }
-
+.card-heading > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;  
+}
 .card-heading h2 {
   margin: 0;
   font-size: clamp(15px, 1.35vw, 30px);
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .card-heading p {
-  margin: 3px 0 0;
+  margin: 0;        
   color: #999;
   font-size: 18px;
+  line-height: 1.3;
 }
-
 .source-badge {
   flex: 0 0 auto;
   padding: 5px 11px;
@@ -2184,7 +2336,6 @@ html[dir="ltr"] .slider-track {
   color: white;
   font-size: 16px;
 }
-/* كلمة "مستخدم" بالأسود جانب الرقم */
 .source-meta strong .user-label {
   color: #000;
   font-weight: 600;
@@ -2198,10 +2349,12 @@ html[dir="ltr"] .slider-track {
 
 .projection-table {
   width: 100%;
-  min-width: 550px;
+  /* min-width: 550px; */
   border-collapse: collapse;
   text-align: center;
   font-size: 11px;
+   font-size: clamp(9px, 1vw, 14px);  /* ⭐ حجم خط متجاوب */
+  table-layout: fixed; 
 }
 
 .projection-table th {
@@ -2218,7 +2371,9 @@ html[dir="ltr"] .slider-track {
   white-space: nowrap;
 }
 .projection-table td {
-  color:#000000
+  color:#000000;
+  font-weight: 700;
+ font-size: 14px;
 }
 .projection-table td:last-child {
   color: #c33b49;
@@ -2230,6 +2385,50 @@ html[dir="ltr"] .slider-track {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 14px;
+ }
+
+
+ .projection-table {
+  width: 100%;
+  /* شيلنا min-width: 550px */ 
+  border-collapse: collapse;
+  text-align: center;
+  font-size: clamp(9px, 1vw, 14px);  /* ⭐ حجم خط متجاوب */
+  table-layout: fixed;                /* ⭐ يوزع الأعمدة بالتساوي */
+}
+
+.projection-table th {
+  padding: clamp(4px, 0.8vw, 9px) clamp(3px, 0.6vw, 6px);
+  background: #e8e8e8;
+  font-weight: 700;
+  font-size: clamp(10px, 1.1vw, 15px);
+  white-space: normal;                /* ⭐ يسمح بالالتفاف */
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.projection-table td {
+  padding: clamp(4px, 0.8vw, 9px) clamp(2px, 0.5vw, 5px);
+  border-bottom: 1px solid #e7e7e7;
+  color: #000;
+  font-weight: 700;
+  font-size: clamp(9px, 1vw, 14px);
+  white-space: nowrap;                /* الأرقام مش هتلف */
+}
+
+.projection-table td:last-child {
+  color: #c33b49;
+}
+
+.table-scroll {
+  overflow-x: auto;      /* خليها auto بدل hidden، عشان لو الجدول احتاج scroll في حالات نادرة */
+  border-radius: 10px;
+  scrollbar-width: none; /* ⭐ إخفاء شريط التمرير في Firefox */
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll::-webkit-scrollbar {
+  display: none;         /* ⭐ إخفاء شريط التمرير في Chrome/Safari */
 }
 /* ==========================================
    Year Dot — الدائرة جانب كل سنة
@@ -2264,11 +2463,11 @@ html[dir="ltr"] .slider-track {
   padding: 12px;
   border-radius: 16px;
   background: #e8e8e8;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .projection-totals span,
-.revenue-totals span { font-size: 22px; }
+.revenue-totals span { font-size: 18px; }
 
 .projection-totals strong,
 .revenue-totals strong {
@@ -2277,7 +2476,7 @@ html[dir="ltr"] .slider-track {
   line-height: 1.3;
 }
 
-.projection-totals small { color: #777; font-size: 16px; }
+.projection-totals small { color: #171717; font-size: 14px; }
 
 .revenue-sources { display: grid; gap: 9px; }
 
@@ -2285,7 +2484,7 @@ html[dir="ltr"] .slider-track {
   min-width: 0;
   padding-bottom: 7px;
   border-bottom: 1px solid #e7e7e7;
-}
+ }
 
 .source-meta {
   display: flex;
@@ -2301,7 +2500,7 @@ html[dir="ltr"] .slider-track {
 .source-meta h3 {
   overflow: hidden;
   margin: 0;
-  font-size: 13px;
+  font-size: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -2346,7 +2545,8 @@ html[dir="ltr"] .slider-track {
 
 .revenue-source small b { color: #bd3441; }
 
-.revenue-totals { margin-top: 12px; }
+.revenue-totals { margin-top: 12px }
+.revenue-totals  small { color: #171717; font-size: 14px; }
 
 /* ==========================================
    Responsive — تحت 1200px بس
@@ -2391,7 +2591,7 @@ html[dir="ltr"] .slider-track {
   .revenue-card { border-radius: 18px; }
 
   .projection-table {
-    min-width: 500px;
+    /* min-width: 500px; */
     font-size: 11px;
   }
 
@@ -2600,3 +2800,41 @@ html[lang="ar"] .source-track i {
   .milestone-two   { top: 37%; right: 32%; }
   .milestone-three { bottom: 13%; right: 5%; }
 }
+
+
+/* ظظظظظظظظظظظ
+ */
+ 
+
+ /* /////////////////////////////// */
+ .answer ul {
+  list-style: none; /* لإلغاء النقط الافتراضية للـ UL */
+  padding: 0;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* مسافة بين كل عنصر والتاني */
+}
+
+.answer li {
+  line-height: 1.6;
+  position: relative;
+  padding-right: 18px; /* مسافة لرمز النقطة المخصص لو حابة */
+  color: #888;
+  margin-bottom: 10px;
+}
+
+/* إضافة نقطة ملونة مخصصة أمام كل عنصر */
+.answer li::before {
+  content: "•";
+  color: #8D8D8D; /* اختاري اللون المناسب لموقعك */
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: absolute;
+  right: 0;
+  top: -2px;
+}
+
+
+/*  */
+
