@@ -1317,8 +1317,869 @@ html[dir="ltr"] .slider-track {
 }
 
  
+/* ==========================================
+   World Connectivity Image (16:9 – Responsive)
+   Design spec: 1920 × 1080 | angle 0 | opacity 1
+   ========================================== */
+.world-connectivity {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;          /* الحد الأقصى زي الديزاين */
+    margin: 0 auto;             /* يفضل في النص على الشاشات الكبيرة */
+    padding: 0;
+    opacity: 1;
+    transform: rotate(0deg);    /* angle: 0deg */
+    overflow: hidden;
+    line-height: 0;             /* يمنع المسافة البيضاء تحت الصورة */
+    background: transparent;
+}
 
+.world-connectivity img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;       /* نفس نسبة 1920×1080 */
+    object-fit: cover;          /* يملأ العرض بدون تشويه */
+    object-position: center;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+ 
+/* شاشات كبيرة جداً */
+@media (min-width: 1921px) {
+    .world-connectivity {
+        border-radius: 0;          /* لو عايزة حواف ناعمة خليها 24px */
+    }
+}
+
+/* تابلت */
+@media (max-width: 992px) {
+    .world-connectivity img {
+        aspect-ratio: 16 / 9;      /* يفضل زي ما هو */
+    }
+}
+
+/* موبايل */
+@media (max-width: 576px) {
+    .world-connectivity img {
+        aspect-ratio: auto;        /* على الموبايل خليها ترجع لطولها الطبيعي */
+        object-fit: contain;       /* عشان التفاصيل تبان كاملة */
+    }
+}
+.world-connectivity {
+    margin-top: 60px;
+    /* margin-bottom: 80px;   مسافة قبل قسم الأسئلة */
+}
+
+/*  */
+ 
+ 
+ 
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap");
+
+/* ==========================================
+   Main Card Container
+   ========================================== */
+.timeline-card {
+  position: relative; 
+  isolation: isolate; 
+  overflow: hidden;
+  min-height: 550px; /* زيادة الارتفاع لاستيعاب الرقم الكبير تحته */
+  padding: 32px 7%; 
+  color: #38383a;
+  background: #F3F3F3; 
+  font-family: "Cairo", sans-serif;
+    border-bottom: 4px solid #000000; 
+ }
+
+/* ==========================================
+   Left Column (العنوان + الرقم الكبير)
+   ========================================== */
+
+ .timeline-left-col {
+  position: absolute;
+    top: 10%; /* تعديل بسيط لرفع الحاوية قليلاً لأعلى لتوفير مساحة للرقم الكبير */
+  left: -40px; /* تقليل المسافة لدفعها لليسار وتوفير مساحة في المنتصف */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+}
+/* العنوان */
+.timeline-heading { 
+  width: 553px; /* القيمة المطلوبة */
+  height: 130px; /* القيمة المطلوبة */
+  text-align: right; 
+  color: #D72229; 
+  margin: 0;
+}
+
+.timeline-heading p { 
+  margin: 0; 
+  font-family: "Cairo", sans-serif;
+  font-weight: 600; 
+  font-size: 50px; 
+  line-height: 130%; 
+  letter-spacing: 0%; 
+  
+}
+
+
+/* الرقم الكبير 01 */
+ 
+.timeline-number { 
+  width: 698px; 
+  height: 400px; 
+  font-family: "Cairo", sans-serif;
+  font-weight: 700;
+  font-size: 330px; 
+  line-height: 1; 
+  letter-spacing: -.05em;
+  margin-top: 80px; /* تم تصحيح الخطأ هنا */
+  
+  background: linear-gradient(180deg, #D72229 20%, rgba(215, 34, 41, 0.05) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.timeline-number { 
+  width: 698px; 
+   font-family: "Cairo", sans-serif;
+  font-weight: 700;
+  font-size: 570px; /* <-- تم تكبير الرقم ليكون ضخماً جداً */
+  line-height: 0.8; /* <-- تقليل ارتفاع السطر ليتداخل الرقم مع الحدود السفلية بشكل أعمق */
+  letter-spacing: -.05em;
+  margin-top: -25px;  
+   background: linear-gradient(180deg, #D72229 20%, rgba(215, 34, 41, 0.05) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
  
 
+/* ==========================================
+   Dashed Path & Circles
+   ========================================== */
+.timeline-path { 
+  position: absolute; 
+  inset: 10% 4% 4%; 
+  width: 92%; 
+  height: 86%; 
+  z-index: 0; 
+  overflow: visible; 
+}
+.timeline-path path { 
+  fill: none; 
+  stroke: #b93948; 
+  stroke-width: 2; 
+  stroke-dasharray: 8 8; 
+}
+.timeline-path circle { 
+  fill: #111; 
+}
+
+/* ==========================================
+   Milestones (01, 02, 03)
+   ========================================== */
+.milestone { 
+  position: absolute; 
+  z-index: 1; 
+  display: flex; 
+  gap: 12px; 
+  align-items: flex-start; 
+  width: 28%; 
+  text-align: right; 
+  font-family: "Cairo", sans-serif; 
+}
+
+.milestone b { 
+  display: flex; 
+  width: 75px; 
+  min-height: 65px; 
+  flex: 0 0 75px; 
+  align-items: center; 
+  justify-content: center; 
+  color: #D72229; 
+  font-size: clamp(24px, 2.6vw, 50px); 
+  font-weight: 700; 
+  line-height: 1.3; 
+}
+
+.milestone h3, .milestone p { 
+  margin: 0; 
+  color: #343434; 
+  text-align: right; 
+}
+
+.milestone h3 { 
+  font-size: clamp(16px, 1.56vw, 30px); 
+  font-weight: 700; 
+  line-height: 1.3; 
+}
+
+.milestone p { 
+  margin-top: 4px; 
+  font-size: clamp(13px, 1.3vw, 25px); 
+  font-weight: 600; 
+  line-height: 1.3; 
+}
+
+/* تحديد أماكن النقاط */
  
+.timeline-right-col {
+    position: absolute;
+    top: 0;
+    right: 20px; /* Aligns to the right edge */
+    width: 90%; /* Takes up 70% of the card's width */
+    height: 100%;
+}
+.timeline-path {
+    position: absolute;
+    top: 10%;
+    right: 0; /* Aligned to the right of the new container */
+    width: 100%;
+    height: 80%;
+}
+.milestone-one { top: 10%; right: 5%; }
+.milestone-two { top: 35%; right: 35%; }
+.milestone-three { bottom: 15%; right: 5%; }
+
+/* ==========================================
+   Responsive Design (للموبايل)
+   ========================================== */
+@media (max-width: 1200px) {
+  .timeline-left-col {
+    top: 10%;
+    left: 40px; /* تقليل المسافة في الشاشات المتوسطة */
+  }
+  .timeline-heading { width: 450px; }
+  .timeline-heading p { font-size: 40px; }
+  .timeline-number { width: 500px; font-size: 250px; height: 250px; }
+}
+
+@media (max-width: 768px) {
+  .timeline-card { 
+    min-height: 600px; 
+    padding: 20px 5%; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* جعل الحاوية في أعلى الموبايل */
+  .timeline-left-col {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    align-items: center; /* توسيط في الموبايل */
+    margin-bottom: 40px;
+  }
+  
+  .timeline-heading { 
+    width: 100%; 
+    height: auto; 
+    text-align: center; 
+  }
+  
+  .timeline-heading p { 
+    font-size: clamp(24px, 7vw, 32px); 
+  }
+  
+  .timeline-number {
+    width: 100%;
+    height: auto;
+    font-size: clamp(120px, 40vw, 200px);
+    text-align: center;
+  }
+
+  .resolution {
+    display: none; /* إخفاء شارة المقاسات في الموبايل */
+  }
+
+  .milestone { 
+    width: 48%; 
+    gap: 5px; 
+  }
+  
+  .milestone b { 
+    width: 48px; 
+    min-height: 42px; 
+    flex-basis: 48px; 
+    font-size: clamp(22px, 6vw, 30px); 
+  }
+  
+  .milestone h3 { font-size: clamp(14px, 4vw, 18px); }
+  .milestone p { font-size: clamp(12px, 3.2vw, 15px); }
+  
+  .milestone-one { top: 35%; right: 5%; }
+  .milestone-two { top: 55%; right: 5%; }
+  .milestone-three { bottom: 5%; right: 5%; }
+}
+
+
+/* ////////////////// */
+
+/* ==========================================
+/* ==========================================
+   Roadmap Header Container
+   ========================================== */
+.roadmap-header-container {
+    background: #F3F3F3;
+    padding: 40px 64px;
+    display: flex;
+    flex-direction: column;
+      align-items: flex-start; 
+    gap: 27px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Direction-aware alignment */
+.roadmap-header-container[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+.roadmap-header-container[dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+}
+
+.roadmap-icon {
+    width: 56px;
+    height: 65px;
+    object-fit: contain;
+    opacity: 1;
+    transform: rotate(0deg);
+    flex-shrink: 0;
+}
+
+.roadmap-header-text {
+    max-width: 1333px;
+    width: 100%;
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 140%;
+    letter-spacing: 0%;
+    color: #D72229;
+}
+
+/* Language-specific typography */
+.roadmap-header-container[dir="rtl"] .roadmap-header-text {
+    text-align: right;
+}
+
+.roadmap-header-container[dir="ltr"] .roadmap-header-text {
+    text-align: left;
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+@media (max-width: 1400px) {
+    .roadmap-header-container {
+        padding: 30px 40px;
+    }
+    .roadmap-header-text {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .roadmap-header-container {
+        padding: 25px 20px;
+        align-items: center;
+        text-align: center;
+    }
+    .roadmap-icon {
+        width: 45px;
+        height: 52px;
+    }
+    .roadmap-header-text {
+        font-size: 22px;
+        line-height: 150%;
+        text-align: center;
+    }
+}
+
+/* //////////// */
+/* 
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap");
+
+* { box-sizing: border-box; }
+.finance-dashboard {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px; min-width: 1200px;  direction: ltr;
+  color: #252525; font-family: "Cairo", sans-serif;margin-top: 40px; margin-bottom: 40px; margin-right: 40px; margin-left: 40px; 
+}
+.projection-card, .revenue-card {
+  min-width: 0; padding: 16px; border: 2px solid #299bd3;
+  border-radius: 24px; background: #f4f4f4; direction: rtl;
+}
+.revenue-card { border: 0; border-radius: 22px; }
+.card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.card-heading h2 { margin: 0; font-size: clamp(15px, 1.35vw, 30px); font-weight: 700; }
+.card-heading p { margin: 3px 0 0; color: #999; font-size: 11px; }
+.source-badge { flex: 0 0 auto; padding: 5px 11px; border-radius: 20px; background: #cf2635; color: white; font-size: 10px; }
+.table-scroll { overflow-x: auto; border-radius: 10px; scrollbar-width: thin }
+.projection-table { width: 100%; min-width: 550px; border-collapse: collapse; text-align: center; font-size: 11px; }
+.projection-table th { padding: 9px 6px; background: #e8e8e8; font-weight: 700; white-space: nowrap; }
+.projection-table td { padding: 9px 5px; border-bottom: 1px solid #e7e7e7; white-space: nowrap; }
+.projection-table td:last-child { color: #c33b49; font-weight: 700; }
+.projection-totals, .revenue-totals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.projection-totals article, .revenue-totals article { display: flex; min-width: 0; flex-direction: column; gap: 3px; padding: 12px; border-radius: 16px; background: #e8e8e8; text-align: center; }
+.projection-totals span, .revenue-totals span { font-size: 10px; }
+.projection-totals strong, .revenue-totals strong { color: #c52c37; font-size: clamp(17px, 2vw, 26px); line-height: 1.3; }
+.projection-totals small { color: #777; font-size: 9px; }
+.revenue-sources { display: grid; gap: 9px; }
+.revenue-source { min-width: 0; padding-bottom: 7px; border-bottom: 1px solid #e7e7e7; }
+.source-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.source-meta h3 { overflow: hidden; margin: 0; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.source-meta strong { flex: 0 0 auto; color: #c33b49; font-size: 11px; }
+.revenue-source p { overflow: hidden; margin: 2px 0 5px; color: #aaa; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.source-track { height: 6px; overflow: hidden; border-radius: 10px; background: #ddd; }
+.source-track i { display: block; height: 100%; margin-inline-start: auto; border-radius: inherit; background: #ce2738; }
+.revenue-source small { display: flex; justify-content: space-between; margin-top: 4px; color: #888; font-size: 9px; }
+.revenue-source small b { color: #bd3441; }
+.revenue-totals { margin-top: 12px; }
+@media (max-width: 760px) {
+  .finance-dashboard { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .projection-card, .revenue-card { padding: 14px; }
+  .projection-table { min-width: 560px; }
+  .revenue-sources { gap: 10px; }
+}
+@media (max-width: 420px) {
+  .projection-card, .revenue-card { padding: 11px; border-radius: 18px; }
+  .card-heading { align-items: flex-start; }
+  .card-heading h2 { font-size: 14px; }
+  .card-heading p { font-size: 9px; }
+  .projection-totals article, .revenue-totals article { padding: 9px 5px; }
+  .projection-totals strong, .revenue-totals strong { font-size: 16px; }
+  .source-badge { padding: 4px 7px; font-size: 9px; }
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap");
+
+* { box-sizing: border-box; }
+
+/* ==========================================
+   Base — نفس تصميمك الأصلي بالظبط
+   ========================================== */
+.finance-dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  min-width: 1200px;        /* ← يفضل زي ما هو للشاشات الكبيرة */
+  /* direction: ltr; */
+  color: #252525;
+  font-family: "Cairo", sans-serif;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.projection-card, .revenue-card {
+  min-width: 0;
+  padding: 16px;
+  border: 2px solid #299bd3;
+  border-radius: 24px;
+  background: #f4f4f4;
+  /* direction: rtl; */
+}
+
+.revenue-card { border: 0; border-radius: 22px; }
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.card-heading h2 {
+  margin: 0;
+  font-size: clamp(15px, 1.35vw, 30px);
+  font-weight: 700;
+}
+
+.card-heading p {
+  margin: 3px 0 0;
+  color: #999;
+  font-size: 18px;
+}
+
+.source-badge {
+  flex: 0 0 auto;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: #cf2635;
+  color: white;
+  font-size: 16px;
+}
+/* كلمة "مستخدم" بالأسود جانب الرقم */
+.source-meta strong .user-label {
+  color: #000;
+  font-weight: 600;
+}
+.table-scroll {
+  overflow-x: auto;
+  border-radius: 10px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.projection-table {
+  width: 100%;
+  min-width: 550px;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 11px;
+}
+
+.projection-table th {
+  padding: 9px 6px;
+  background: #e8e8e8;
+  font-weight: 700;
+  white-space: nowrap;
+   font-size :15px;
+}
+
+.projection-table td {
+  padding: 9px 5px;
+  border-bottom: 1px solid #e7e7e7;
+  white-space: nowrap;
+}
+.projection-table td {
+  color:#000000
+}
+.projection-table td:last-child {
+  color: #c33b49;
+  font-weight: 700;
+}
+
+.projection-totals, .revenue-totals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+/* ==========================================
+   Year Dot — الدائرة جانب كل سنة
+   ========================================== */
+.projection-table td:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.year-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #B4B4B9;
+  flex-shrink: 0;
+}
+.projection-table td {
+  padding: 9px 5px;
+  border-bottom: 1px solid #e7e7e7;
+  white-space: nowrap;   /* ← دي هتمنع flex من الشغل صح */
+}
+
+.projection-totals article,
+.revenue-totals article {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px;
+  border-radius: 16px;
+  background: #e8e8e8;
+  text-align: center;
+}
+
+.projection-totals span,
+.revenue-totals span { font-size: 22px; }
+
+.projection-totals strong,
+.revenue-totals strong {
+  color: #c52c37;
+  font-size: clamp(17px, 2vw, 26px);
+  line-height: 1.3;
+}
+
+.projection-totals small { color: #777; font-size: 16px; }
+
+.revenue-sources { display: grid; gap: 9px; }
+
+.revenue-source {
+  min-width: 0;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.source-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
  
+}
+.source-meta strong{
+  transform: translateY(20px) !important;
+}
+
+.source-meta h3 {
+  overflow: hidden;
+  margin: 0;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-meta strong {
+  flex: 0 0 auto;
+  color: #c33b49;
+  font-size: 11px;
+}
+
+.revenue-source p {
+  overflow: hidden;
+  margin: 2px 0 5px;
+  color: #aaa;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #ddd;
+}
+
+.source-track i {
+  display: block;
+  height: 100%;
+  margin-inline-start: auto;
+  border-radius: inherit;
+  background: #ce2738;
+}
+
+.revenue-source small {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  color: #888;
+  font-size: 9px;
+}
+
+.revenue-source small b { color: #bd3441; }
+
+.revenue-totals { margin-top: 12px; }
+
+/* ==========================================
+   Responsive — تحت 1200px بس
+   ========================================== */
+
+/* 💻 Laptop صغير / تابلت أفقي كبير (≤ 1200px) */
+@media (max-width: 1200px) {
+  .finance-dashboard {
+    min-width: 0;              /* ← المفتاح: نشيل min-width هنا بس */
+    margin-right: 24px;
+    margin-left: 24px;
+    gap: 16px;
+  }
+}
+
+/* 💻 تابلت أفقي (≤ 992px) */
+@media (max-width: 992px) {
+  .finance-dashboard {
+    grid-template-columns: 1fr;  /* الكروت تيجي تحت بعض */
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    gap: 16px;
+  }
+  .projection-card, .revenue-card { padding: 16px; }
+}
+
+/* 📱 تابلت عمودي (≤ 760px) */
+@media (max-width: 760px) {
+  .finance-dashboard {
+    margin-right: 16px;
+    margin-left: 16px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    gap: 14px;
+  }
+  .projection-card, .revenue-card {
+    padding: 14px;
+    border-radius: 20px;
+  }
+  .revenue-card { border-radius: 18px; }
+
+  .projection-table {
+    min-width: 500px;
+    font-size: 11px;
+  }
+
+  .revenue-sources { gap: 10px; }
+}
+
+/* 📱 موبايل كبير (≤ 576px) */
+@media (max-width: 576px) {
+  .finance-dashboard {
+    margin-right: 12px;
+    margin-left: 12px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    gap: 12px;
+  }
+
+  .projection-card, .revenue-card {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* الإجماليات تحت بعض عشان الأرقام الكبيرة تبان */
+  .projection-totals,
+  .revenue-totals {
+    grid-template-columns: 1fr;
+  }
+
+  /* النصوص الطويلة تلتف بدل ما تتقطع */
+  .source-meta {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .source-meta h3 {
+    white-space: normal;
+    text-overflow: clip;
+    overflow: visible;
+    flex: 1 1 auto;
+  }
+  .revenue-source p {
+    white-space: normal;
+    text-overflow: clip;
+    overflow: visible;
+  }
+}
+
+/* 📱 موبايل صغير (≤ 400px) */
+@media (max-width: 400px) {
+  .finance-dashboard {
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+
+  .projection-card, .revenue-card {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .card-heading h2 { font-size: 14px; }
+  .card-heading p  { font-size: 9px; }
+
+  .projection-table {
+    min-width: 440px;
+    font-size: 10px;
+  }
+
+  .projection-totals strong,
+  .revenue-totals strong { font-size: 18px; }
+}
+/*  */
+
+html[lang="en"] .timeline-heading .timeline-subtitle {
+    display: none;
+} 
+
+/* ==========================================
+   Revenue Totals — Description Styling
+   ========================================== */
+/* .revenue-totals article {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.revenue-totals article small {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+    margin-top: 4px;
+} */
+
+
+
+/* ==========================================
+   Finance Dashboard — Direction per Language
+   ========================================== */
+
+/* 🇸🇦 عربي — يبدأ من اليمين */
+html[lang="ar"] .finance-dashboard,
+html[lang="ar"] .projection-card,
+html[lang="ar"] .revenue-card {
+  direction: rtl;
+  text-align: right;
+}
+
+/* 🇬🇧 إنجليزي — يبدأ من الشمال */
+html[lang="en"] .finance-dashboard,
+html[lang="en"] .projection-card,
+html[lang="en"] .revenue-card {
+  direction: ltr;
+  text-align: left;
+}
+
+/* الكروت تاخد نفس الاتجاه */
+html[lang="en"] .card-heading,
+html[lang="en"] .source-meta {
+  text-align: left;
+}
+
+/* جدول التوقعات */
+html[lang="en"] .projection-table {
+  text-align: center; /* الجداول تفضل center دائمًا */
+}
+
+/* السنة والدائرة */
+html[lang="en"] .projection-table td:first-child {
+  justify-content: flex-start; /* في الإنجليزي تبدأ من الشمال */
+  padding-left: 12px;
+}
+
+html[lang="ar"] .projection-table td:first-child {
+  justify-content: flex-start; /* في العربي تبدأ من اليمين */
+  padding-right: 12px;
+}
+
+/* Progress Bar يبدأ من الاتجاه الصح */
+html[lang="en"] .source-track i {
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+html[lang="ar"] .source-track i {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}

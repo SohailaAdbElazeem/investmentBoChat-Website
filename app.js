@@ -277,3 +277,68 @@ function duplicateRateCards() {
 
 // استدعاء الدالة عند تحميل الصفحة
 window.addEventListener('DOMContentLoaded', duplicateRateCards);
+
+
+// ==========================================
+ // ==========================================
+// مزامنة اتجاه الـ dashboard مع اللغة
+// ==========================================
+// function syncDashboardDirection(lang) {
+//   const dashboard = document.getElementById('finance-dashboard');
+//   if (!dashboard) return;
+
+//   dashboard.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+// }
+
+// // ربطها بزر الترجمة — ضيفي السطر ده في handler الترجمة
+// // syncDashboardDirection(document.documentElement.lang);
+
+// // أو استخدمي MutationObserver عشان يشتغل تلقائيًا:
+// (function watchLang() {
+//   const observer = new MutationObserver(() => {
+//     const lang = document.documentElement.lang || 'ar';
+//     syncDashboardDirection(lang);
+//   });
+
+//   observer.observe(document.documentElement, {
+//     attributes: true,
+//     attributeFilter: ['lang', 'dir']
+//   });
+
+//   // تشغيل أولي
+//   syncDashboardDirection(document.documentElement.lang || 'ar');
+// })();
+
+
+// ==========================================
+// مزامنة lang + dir مع اللغة
+// ==========================================
+(function watchLanguage() {
+  const translateBtn = document.getElementById('translateBtn');
+  if (!translateBtn) return;
+
+  // راقب نص الزر: "English" = الوضع عربي، "عربي" = الوضع إنجليزي
+  function updateDirection() {
+    const btnText = translateBtn.textContent.trim();
+    const isArabic = (btnText === 'English');
+
+    // غيّر lang و dir على <html>
+    document.documentElement.lang = isArabic ? 'ar' : 'en';
+    document.documentElement.dir  = isArabic ? 'rtl' : 'ltr';
+  }
+
+  // شغّل أول مرة
+  updateDirection();
+
+  // راقب التغيير في نص الزر
+  new MutationObserver(updateDirection).observe(translateBtn, {
+    childList: true,
+    characterData: true,
+    subtree: true
+  });
+
+  // أو راقب الضغط على الزر
+  translateBtn.addEventListener('click', () => {
+    setTimeout(updateDirection, 50);
+  });
+})();
