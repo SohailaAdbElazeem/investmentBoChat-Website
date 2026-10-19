@@ -2148,7 +2148,7 @@ html[dir="ltr"] .slider-track {
 .projection-card, .revenue-card {
   min-width: 0;
   padding: 16px;
-  border: 2px solid #299bd3;
+  /* border: 2px solid #299bd3; */
   border-radius: 24px;
   background: #f4f4f4;
   /* direction: rtl; */
