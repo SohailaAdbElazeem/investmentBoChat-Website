@@ -90,12 +90,7 @@
 
             </div>
             <div class="rate-card duplicate"> 
-            <!-- <div class="text-rating">
-                <h4>2k+</h4> 
-                <p  data-ar="عدد تحميلات التطبيق" data-en="Number of app downloads">  Number of app downloads  </p>
-            </div>
-            <i class="fa-solid fa-heart"></i>
-            </div> -->
+            
              <div class="text-rating">
             <h2>4</h2>
            <h3  data-ar="توسع ذكي"
@@ -1161,7 +1156,110 @@ form.addEventListener('submit', function(e) {
 
 });
 </script>
+<script>
+(function () {
+  const cfg = [
+    { users:500000, price:0.0275, qty:1,     conv:100, max:100, step:1   }, // الإعلانات
+    { users:300000, price:0.60,   qty:1,     conv:2.5, max:10,  step:0.1 }, // البريميوم
+    { users:5000,   price:1.50,   qty:1,     conv:1.5, max:10,  step:0.1 }, // التوثيق
+    { users:300000, price:0.01,   qty:50,    conv:2,   max:10,  step:0.1 }, // المكالمات
+    { users:50000,  price:0.0002, qty:20000, conv:1.5, max:10,  step:0.1 }  // العملات
+  ];
 
-     <script src="./app.js"></script>
+  const cards  = [...document.querySelectorAll('.revenue-source')];
+  const totals = document.querySelectorAll('.revenue-totals strong'); // [0] سنوي، [1] شهري
+  const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+  const getLang = () => document.documentElement.lang === 'en' ? 'en' : 'ar';
+
+  function update() {
+    const lang = getLang();
+    let monthly = 0;
+
+    cards.forEach((card, i) => {
+      const c = cfg[i];
+      const payers = c.users * (c.conv / 100);
+      const profit = payers * c.price * c.qty;
+      monthly += profit;
+
+      card.querySelector('.source-meta strong').firstChild.textContent =
+        ' ' + Math.round(payers).toLocaleString('en-US') + ' ';
+
+      // الشريط الأحمر: عربي = ثابت على اليمين، إنجليزي = ثابت على الشمال
+      const track = card.querySelector('.source-track');
+      track.style.position = 'relative';
+      track.style.overflow = 'hidden';
+      const bar = track.querySelector('i');
+      bar.style.position = 'absolute';
+      bar.style.top = '0';
+      bar.style.bottom = '0';
+      bar.style.height = 'auto';
+      bar.style.display = 'block';
+      bar.style.width = (c.conv / c.max * 100) + '%';
+      if (lang === 'ar') { bar.style.right = '0'; bar.style.left = 'auto'; }
+      else               { bar.style.left  = '0'; bar.style.right = 'auto'; }
+
+      const small = card.querySelector('small');
+      small.dataset.ar = 'الربح المتوقع شهريًا <b>' + fmt(profit) + '</b>';
+      small.dataset.en = 'Expected monthly profit <b>' + fmt(profit) + '</b>';
+      small.innerHTML = small.dataset[lang];
+  // const small = card.querySelector('small');
+      small.style.display = 'block';
+      small.style.width = '100%';
+      small.style.textAlign = (lang === 'ar') ? 'left' : 'right';
+
+
+      if (i > 0) {
+        const p = card.querySelector('p');
+        p.dataset.ar = p.dataset.ar.replace(/[\d.]+%/, c.conv + '%');
+        p.dataset.en = p.dataset.en.replace(/[\d.]+%/, c.conv + '%');
+        p.textContent = p.dataset[lang];
+      }
+    });
+
+    totals[1].textContent = fmt(monthly);
+    totals[0].textContent = fmt(monthly * 12);
+  }
+
+  // السحب بالماوس أو اللمس (نفس اتجاه الشريط)
+  cards.forEach((card, i) => {
+    const track = card.querySelector('.source-track');
+    track.style.cursor = 'ew-resize';
+    track.style.touchAction = 'none';
+
+    const setFromPointer = e => {
+      const c = cfg[i];
+      const r = track.getBoundingClientRect();
+      let ratio = getLang() === 'ar'
+        ? (r.right - e.clientX) / r.width
+        : (e.clientX - r.left) / r.width;
+      ratio = Math.min(1, Math.max(0, ratio));
+      c.conv = +(Math.round((ratio * c.max) / c.step) * c.step).toFixed(2);
+      update();
+    };
+
+    track.addEventListener('pointerdown', e => {
+      track.setPointerCapture(e.pointerId);
+      setFromPointer(e);
+      const move = ev => setFromPointer(ev);
+      const up = () => {
+        track.removeEventListener('pointermove', move);
+        track.removeEventListener('pointerup', up);
+        track.removeEventListener('pointercancel', up);
+      };
+      track.addEventListener('pointermove', move);
+      track.addEventListener('pointerup', up);
+      track.addEventListener('pointercancel', up);
+    });
+  });
+
+  // لو اللغة اتبدّلت يتحدّث الاتجاه تلقائيًا
+  new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+  update();
+})();
+</script>
+
+
+<script src="./app.js"></script>
    
 </html>

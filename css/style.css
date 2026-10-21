@@ -2475,7 +2475,17 @@ html[dir="ltr"] .slider-track {
   font-size: clamp(17px, 2vw, 26px);
   line-height: 1.3;
 }
+/* html[lang="en"] .revenue-totals span {
+  font-size: 0.75rem;
+} */
 
+/* html[lang="en"] .revenue-totals strong {
+  font-size: 1.1rem; الرقم الكبير ممكن يفضل واضح
+} */
+
+html[lang="en"] .revenue-totals small {
+  font-size: 0.8rem;
+}
 .projection-totals small { color: #171717; font-size: 14px; }
 
 .revenue-sources { display: grid; gap: 9px; }
@@ -2483,7 +2493,7 @@ html[dir="ltr"] .slider-track {
 .revenue-source {
   min-width: 0;
   padding-bottom: 7px;
-  border-bottom: 1px solid #e7e7e7;
+  /* border-bottom: 1px solid #e7e7e7; */
  }
 
 .source-meta {
@@ -2535,9 +2545,11 @@ html[dir="ltr"] .slider-track {
   background: #ce2738;
 }
 
-.revenue-source small {
+ .revenue-source small {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 4px;
   margin-top: 4px;
   color: #888;
   font-size: 9px;
